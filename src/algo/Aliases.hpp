@@ -1,8 +1,9 @@
 #pragma once
 
 #include <ranges>
+#include <algorithm>
 
-namespace game::core {
+namespace game::algo {
 
     namespace rng = std::ranges;
     namespace views = std::views;
