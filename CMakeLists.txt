@@ -15,10 +15,14 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/3rdparty/spdlog)
 if(NOT TARGET spdlog)
     find_package(spdlog REQUIRED)
 endif()
+
 find_package(Threads REQUIRED)
 find_package(Boost COMPONENTS system REQUIRED)
+find_package(range-v3 REQUIRED)
+
 
 include_directories(/usr/local/include ${Boost_INCLUDE_DIR})
+include_directories(${THIRD_PARTY}/ranges/include)
 include_directories(${THIRD_PARTY}/spdlog/include/spdlog)
 include_directories(${THIRD_PARTY}/doctest/doctest)
 
@@ -42,3 +46,4 @@ endif()
 
 add_executable(main main.cpp ${SRC_LIST})
 target_link_libraries(main PRIVATE spdlog::spdlog)
+target_link_libraries(main PRIVATE range-v3)

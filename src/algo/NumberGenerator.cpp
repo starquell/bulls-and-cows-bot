@@ -14,21 +14,30 @@ namespace game::algo {
             return _cache[size];
         }
 
-        std::vector <Number> result;
-        const auto variants_size = std::pow(10, size);
-        result.reserve(variants_size);
+        // std::vector <Number> result;
+        // const auto variants_size = std::pow(10, size);
+        // result.reserve(variants_size);
 
-        for (auto&& num : views::iota (1, variants_size) |
-                          views::transform ([size] (const auto num) {
-                              return Number::from_int(num, size).value();
-                          }) |
-                          views::filter ([] (const auto num) {
-                              return num.valid();
-                          }))
-        {
-            result.emplace_back(std::move(num));
-        }
-        result.shrink_to_fit();
+        // for (auto&& num : views::iota (1, variants_size) |
+        //                   views::transform ([size] (const auto num) {
+        //                       return Number::from_int(num, size).value();
+        //                   }) |
+        //                   views::filter ([] (const auto num) {
+        //                       return num.valid();
+        //                   }))
+        // {
+        //     result.emplace_back(std::move(num));
+        // }
+        // result.shrink_to_fit();
+
+        const auto result = views::iota (1, std::pow(10, size)) |
+                            views::transform ([size] (const auto num) {
+                                return Number::from_int(num, size).value();
+                            }) |
+                            views::filter ([] (const auto num) {
+                               return num.valid();
+                            })
+                            | ranges::to<std::vector>();
 
         _cache[size] = result;
 

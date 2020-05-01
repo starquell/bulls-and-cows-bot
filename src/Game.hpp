@@ -11,13 +11,11 @@
 
 namespace game {
 
-    class Game
-    {
+    class Game {
     public:
         using Number = algo::Number;
 
-        enum class Player
-        {
+        enum class Player {
             None,
             User,
             Machine
@@ -66,7 +64,7 @@ namespace game {
     auto easy_game (const Game::Number::SizeType size) -> GameType
     {
         if (utils::true_with_chance(0.5)) {
-            return GameType {size, 0.5, size};
+            return GameType {size, 0.55, size};
         }
         else {
             return GameType {size, 0.3, 0};
@@ -81,7 +79,7 @@ namespace game {
                 return GameType {size, 0.65, 0};
             }
             else {
-                return GameType {size, 0.75, size};
+                return GameType {size, 0.9, size};
             }
         }
         else {

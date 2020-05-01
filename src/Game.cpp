@@ -11,20 +11,16 @@ namespace game {
             similar_digits 
             }
     {}
-    
-    catch (std::exception &e)
-    {
+    catch (std::exception &e) {
         Logger::get()->critical(e.what());
         std::terminate();
     }
 
     auto Game::my_turn() noexcept -> Game::TurnResult
     {
-        try
-        {
+        try {
             const auto asked = _algo.ask();
-            if (!asked.has_value())
-            {
+            if (!asked.has_value()) {
                 incorrect_input();
                 _winner = Player::None;
                 return TurnResult::Unsuccesful;
@@ -32,8 +28,7 @@ namespace game {
             my_assumption(asked.value());
             const BullsCows bc = users_answer();
 
-            if (bc.bulls == _algo.num_size())
-            {
+            if (bc.bulls == _algo.num_size()) {
                 _winner = Player::Machine;
                 return TurnResult::Succesful;
             }
@@ -42,8 +37,7 @@ namespace game {
 
             return TurnResult::Succesful;
         }
-        catch (std::exception &e)
-        {
+        catch (std::exception &e) {
             Logger::get()->critical(e.what());
             std::terminate();
         }
@@ -52,28 +46,21 @@ namespace game {
     void Game::run() noexcept
     {
 
-        if (first_turn() == Player::User)
-        {
+        if (first_turn() == Player::User) {
             while (users_turn() == TurnResult::Unsuccesful)
-            {
-            }
+            {}
         }
-        while (_winner == Player::None)
-        {
+        while (_winner == Player::None) {
             while (my_turn() == TurnResult::Unsuccesful)
-            {
-            }
+            {}
 
-            if (_winner != Player::None)
-            {
+            if (_winner != Player::None) {
                 break;
             }
             while (users_turn() == TurnResult::Unsuccesful)
-            {
-            }
+            {}
         }
-        if (_winner != Player::None)
-        {
+        if (_winner != Player::None) {
             winner(_winner, (_winner == Player::Machine
                                 ? std::make_optional(_algo.num())
                                 : std::nullopt));
@@ -83,19 +70,16 @@ namespace game {
     auto Game::users_turn() noexcept -> TurnResult
     {
         const Number assumption = users_assumption(_algo.num_size());
-        try
-        {
+        try {
 
-            if (!assumption.valid())
-            {
+            if (!assumption.valid()) {
                 incorrect_input();
                 return TurnResult::Unsuccesful;
             }
             const BullsCows respond = _algo.respond(assumption);
             my_answer(respond);
 
-            if (respond.bulls == _algo.num_size())
-            {
+            if (respond.bulls == _algo.num_size()) {
                 _winner = Player::User;
                 return TurnResult::Succesful;
             }
@@ -108,4 +92,4 @@ namespace game {
             std::terminate();
         }
     }
-} // namespace game
+} 

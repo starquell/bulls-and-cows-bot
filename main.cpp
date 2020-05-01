@@ -11,7 +11,7 @@ auto main (int argc, char** argv) -> int
 
     game::Logger::get()->log(spdlog::level::warn, "sds");
 
-    auto game = game::medium_game<game::ConsoleGame>(4);
+    auto game = game::easy_game<game::ConsoleGame>(4);
     game.run();
 
     return 0;

@@ -25,7 +25,7 @@ namespace game::algo {
         void prescribe(const Number &guess) const;
 
     private:
-        double _rightness_chance = 1.0;
+        double _rightness_chance;
         std::optional<Number::SizeType> _similar_digits;
         Number::SizeType _numsize;
         mutable std::optional<Number> _prescribed;
