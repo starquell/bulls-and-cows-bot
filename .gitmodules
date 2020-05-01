@@ -4,3 +4,6 @@
 [submodule "3rdparty/doctest"]
 	path = 3rdparty/doctest
 	url = https://github.com/onqtam/doctest.git
+[submodule "3rdparty/ranges"]
+	path = 3rdparty/ranges
+	url = https://github.com/ericniebler/range-v3.git
